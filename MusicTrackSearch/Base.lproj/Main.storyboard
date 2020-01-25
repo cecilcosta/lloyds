@@ -22,24 +22,69 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Hh4-HG-288"/>
                                 </connections>
                             </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="enj-iV-j6p">
+                                <rect key="frame" x="0.0" y="100" width="414" height="762"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Ef2-aV-2dS"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="dcW-U9-wzJ"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Nrj-15-Rg2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5CL-cb-0i8"/>
+                            <constraint firstItem="enj-iV-j6p" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="91Y-sl-3Bf"/>
+                            <constraint firstItem="enj-iV-j6p" firstAttribute="top" secondItem="Nrj-15-Rg2" secondAttribute="bottom" id="Dhy-xM-viC"/>
                             <constraint firstItem="Nrj-15-Rg2" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Eqp-8j-wVe"/>
                             <constraint firstItem="Nrj-15-Rg2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="V4I-hF-rEM"/>
                             <constraint firstItem="Nrj-15-Rg2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="VHY-X0-jLW"/>
                             <constraint firstItem="Nrj-15-Rg2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pfo-VB-xRn"/>
+                            <constraint firstItem="enj-iV-j6p" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="viq-Iq-tjQ"/>
+                            <constraint firstItem="enj-iV-j6p" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="y4G-0g-jJj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="searchBar" destination="Nrj-15-Rg2" id="KJA-mz-BdL"/>
+                        <outlet property="tableView" destination="enj-iV-j6p" id="IMc-yv-mfI"/>
+                        <segue destination="vZd-LH-sD9" kind="show" identifier="showDetail" id="CR4-M1-WcQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="139"/>
+            <point key="canvasLocation" x="188" y="137"/>
+        </scene>
+        <!--Track Detail View Controller-->
+        <scene sceneID="4FC-qC-HKd">
+            <objects>
+                <viewController id="vZd-LH-sD9" customClass="TrackDetailViewController" customModule="MusicTrackSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="z1e-Ia-AE2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KRp-0M-iUT">
+                                <rect key="frame" x="20" y="44" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="KRp-0M-iUT" firstAttribute="leading" secondItem="3tI-72-jMU" secondAttribute="leading" constant="20" id="eg7-LH-nMd"/>
+                            <constraint firstItem="KRp-0M-iUT" firstAttribute="top" secondItem="3tI-72-jMU" secondAttribute="top" constant="44" id="rJ9-66-08F"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3tI-72-jMU"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="gBE-Nw-gu1"/>
+                    <connections>
+                        <outlet property="artistLabel" destination="KRp-0M-iUT" id="1u7-px-43u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LEL-Su-o4c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1052" y="137"/>
         </scene>
     </scenes>
 </document>
