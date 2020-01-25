@@ -63,6 +63,20 @@ extension ViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) ?? UITableViewCell(style: .default, reuseIdentifier: cellIdentifier)
         cell.accessoryType = .disclosureIndicator
         cell.textLabel?.text = self.tracks[indexPath.row].artist
+        // if this is the last cell, we should already start loading the next page.
+        if indexPath.row == tracks.count - 1 {
+            trackMananger?.nextPage(handler: {[weak self] (tracks) in
+                
+                DispatchQueue.main.async {
+                    
+                    let range = (self?.tracks.count ?? 0)...((self?.tracks.count ?? 0) + tracks.count - 1)
+                
+                    let indexPaths = range.map {IndexPath(row: $0, section: 0) }
+                    self?.tracks.append(contentsOf: tracks)
+                    self?.tableView.insertRows(at: indexPaths, with: .automatic)
+                }
+            })
+        }
         return cell
     }
 }
