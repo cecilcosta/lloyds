@@ -69,11 +69,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JNg-SM-Ahw">
+                                <rect key="frame" x="180" y="778" width="54" height="30"/>
+                                <state key="normal" title="Dismiss"/>
+                                <connections>
+                                    <action selector="close:" destination="vZd-LH-sD9" eventType="touchUpInside" id="KkV-8U-8XE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="3tI-72-jMU" firstAttribute="bottom" secondItem="JNg-SM-Ahw" secondAttribute="bottom" id="X6J-d9-a93"/>
                             <constraint firstItem="KRp-0M-iUT" firstAttribute="leading" secondItem="3tI-72-jMU" secondAttribute="leading" constant="20" id="eg7-LH-nMd"/>
                             <constraint firstItem="KRp-0M-iUT" firstAttribute="top" secondItem="3tI-72-jMU" secondAttribute="top" constant="44" id="rJ9-66-08F"/>
+                            <constraint firstItem="JNg-SM-Ahw" firstAttribute="centerX" secondItem="3tI-72-jMU" secondAttribute="centerX" id="wYy-x8-lIl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3tI-72-jMU"/>
                     </view>
