@@ -11,5 +11,11 @@ import Foundation
 class Track {
     
     var artist: String?
+    var name: String?
+    var url: String?
+    var streamable: String?
+    var listeners: Int?
+    var image: [[String:String]] = [] // TODO class/Struct
+    var mbid: String?
     
 }

@@ -39,9 +39,17 @@ class TrackManager {
                     if let trackMatches = results["trackmatches"] as? [String: Any],
                     let tracks = trackMatches["track"] as? [ [String:Any] ]
                     {
+                        // TODO change t to something else
+                        // TODO MApper
                         let finalTracks = tracks.map {t -> Track in
                             let track = Track()
                             track.artist = t["artist"] as? String
+                            track.name = t["name"] as? String
+                            track.listeners = Int(t["listeners"] as? String ?? "0")
+                            track.mbid = t["mbid"] as? String
+                            track.streamable = t["streamable"] as? String
+                            track.url = t["url"] as? String
+                            track.image = t["image"] as? [[String:String]] ?? []
                             return track
                         }
                         handler(finalTracks)

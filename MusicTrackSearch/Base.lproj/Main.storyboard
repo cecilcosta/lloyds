@@ -63,12 +63,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KRp-0M-iUT">
-                                <rect key="frame" x="20" y="44" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JNg-SM-Ahw">
                                 <rect key="frame" x="180" y="778" width="54" height="30"/>
                                 <state key="normal" title="Dismiss"/>
@@ -76,20 +70,26 @@
                                     <action selector="close:" destination="vZd-LH-sD9" eventType="touchUpInside" id="KkV-8U-8XE"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ly6-6R-xZN">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="776"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="vZd-LH-sD9" id="drl-UZ-bit"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="ly6-6R-xZN" firstAttribute="top" secondItem="3tI-72-jMU" secondAttribute="top" id="EdV-m4-teg"/>
+                            <constraint firstItem="3tI-72-jMU" firstAttribute="trailing" secondItem="ly6-6R-xZN" secondAttribute="trailing" id="HzY-Qs-OaX"/>
+                            <constraint firstItem="ly6-6R-xZN" firstAttribute="leading" secondItem="3tI-72-jMU" secondAttribute="leading" id="Mha-YM-Eb3"/>
                             <constraint firstItem="3tI-72-jMU" firstAttribute="bottom" secondItem="JNg-SM-Ahw" secondAttribute="bottom" id="X6J-d9-a93"/>
-                            <constraint firstItem="KRp-0M-iUT" firstAttribute="leading" secondItem="3tI-72-jMU" secondAttribute="leading" constant="20" id="eg7-LH-nMd"/>
-                            <constraint firstItem="KRp-0M-iUT" firstAttribute="top" secondItem="3tI-72-jMU" secondAttribute="top" constant="44" id="rJ9-66-08F"/>
+                            <constraint firstItem="JNg-SM-Ahw" firstAttribute="top" secondItem="ly6-6R-xZN" secondAttribute="bottom" constant="2" id="vc4-UU-sKm"/>
                             <constraint firstItem="JNg-SM-Ahw" firstAttribute="centerX" secondItem="3tI-72-jMU" secondAttribute="centerX" id="wYy-x8-lIl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3tI-72-jMU"/>
                     </view>
                     <navigationItem key="navigationItem" id="gBE-Nw-gu1"/>
-                    <connections>
-                        <outlet property="artistLabel" destination="KRp-0M-iUT" id="1u7-px-43u"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LEL-Su-o4c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

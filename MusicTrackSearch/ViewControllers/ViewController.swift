@@ -60,9 +60,10 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) ?? UITableViewCell(style: .default, reuseIdentifier: cellIdentifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) ?? UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
         cell.accessoryType = .disclosureIndicator
-        cell.textLabel?.text = self.tracks[indexPath.row].artist
+        cell.textLabel?.text = self.tracks[indexPath.row].name
+        cell.detailTextLabel?.text = self.tracks[indexPath.row].artist
         // if this is the last cell, we should already start loading the next page.
         if indexPath.row == tracks.count - 1 {
             trackMananger?.nextPage(handler: {[weak self] (tracks) in
