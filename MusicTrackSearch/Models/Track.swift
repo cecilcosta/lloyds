@@ -23,4 +23,10 @@ struct Track {
     var image: [Image] = [] 
     var mbid: String?
     
+    func smallPictureUrl() -> URL? {
+        image.reduce(nil) { (result, image) -> URL? in
+            return image.size == "small" ? image.url : result
+        }
+    }
+    
 }

@@ -112,18 +112,38 @@ extension ViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) ?? UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
         cell.accessoryType = .disclosureIndicator
         
-        guard let track = presenter.track(at: indexPath.row) else {
+        let currentPosition = indexPath.row
+        guard let track = presenter.track(at: currentPosition) else {
             return cell
         }
+        
+        
         
         let trackCount = presenter.trackCount
         cell.textLabel?.text = track.name
         cell.detailTextLabel?.text = track.artist
+        if let imageURL = track.smallPictureUrl() {
+            ImageRequester(url: imageURL).request {[weak self] result in
+                DispatchQueue.main.async {
+                    guard case .success(let image) = result,
+                        let row = self?.tableView.indexPath(for: cell)?.row,
+                        row == currentPosition else {
+                        return
+                    }
+                    
+                    // Here my mind has blown up. I was not able to find any picture different than a white star. (https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"). If you know any example please let me know and check if there are issues here or not. 🙃
+                    cell.imageView?.image = image
+                    cell.setNeedsLayout()
+                }
+                
+                
+            }
+        }
         
         
         // if this is the last cell, we should already start loading the next page.
         // There are other ways of doing infinite scrolling, but I chose this one due to its simplicity
-        if indexPath.row == trackCount - 1 {
+        if currentPosition == trackCount - 1 {
             requestNextPage()
         }
         return cell
@@ -132,6 +152,7 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         guard let track = presenter.track(at: indexPath.row) else {
             return
         }

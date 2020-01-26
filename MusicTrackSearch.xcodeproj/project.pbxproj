@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3A0066D323DDE23000AF85AE /* TrackMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0066D223DDE23000AF85AE /* TrackMapper.swift */; };
 		3A0066D623DDE85900AF85AE /* MusicErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0066D523DDE85900AF85AE /* MusicErrors.swift */; };
+		3A0066D823DE070600AF85AE /* ImageRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0066D723DE070600AF85AE /* ImageRequester.swift */; };
 		3A70CDC423DCA0C100E328E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70CDC323DCA0C100E328E2 /* AppDelegate.swift */; };
 		3A70CDC623DCA0C100E328E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70CDC523DCA0C100E328E2 /* SceneDelegate.swift */; };
 		3A70CDC823DCA0C100E328E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70CDC723DCA0C100E328E2 /* ViewController.swift */; };
@@ -49,6 +50,7 @@
 		22C927F6E167C6FFF3CC9B21 /* Pods_MusicTrackSearchTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicTrackSearchTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A0066D223DDE23000AF85AE /* TrackMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackMapper.swift; sourceTree = "<group>"; };
 		3A0066D523DDE85900AF85AE /* MusicErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicErrors.swift; sourceTree = "<group>"; };
+		3A0066D723DE070600AF85AE /* ImageRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequester.swift; sourceTree = "<group>"; };
 		3A70CDC023DCA0C100E328E2 /* MusicTrackSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicTrackSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A70CDC323DCA0C100E328E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A70CDC523DCA0C100E328E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				3AA0F4C023DCA27600BD21F9 /* TrackRequester.swift */,
+				3A0066D723DE070600AF85AE /* ImageRequester.swift */,
 			);
 			path = Requesters;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A0066D823DE070600AF85AE /* ImageRequester.swift in Sources */,
 				3A7E442B23DDCB5D0044009B /* ViewControllerPresenter.swift in Sources */,
 				3A70CDC823DCA0C100E328E2 /* ViewController.swift in Sources */,
 				3AA0F4C423DCA4C500BD21F9 /* Track.swift in Sources */,
