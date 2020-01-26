@@ -20,10 +20,11 @@ class TrackManager {
         self.searchTerm = searchTerm
     }
     
-    func nextPage(handler: @escaping ([Track]) -> ()) {
+    func nextPage(handler: @escaping (Result<[Track], MusicError>) -> ()) {
         
         guard let url = URL(string: "https://ws.audioscrobbler.com/2.0/") else {
-            return // TODO error
+            handler(.failure(.requestError))
+            return
         }
         AF.request(url,
                    method: .get,
@@ -39,14 +40,17 @@ class TrackManager {
             switch dataResponse.result {
             case .success(let json as [String:Any]):
                 guard let results = json["results"] as? [String: Any] else {
-                    // TODO Error
+                    handler(.failure(.requestError))
                     return
                 }
                 
                 if let query = results["opensearch:Query"] as? [String:Any],
                     let startPage = query["startPage"] as? String,
                     let page = Int(startPage){
-                    // TODO control start page
+                    guard page > self.lastPage else {
+                        handler(.failure(.wrongPage))
+                        return
+                    }
                     self.lastPage = page
                 }
                 
@@ -54,11 +58,10 @@ class TrackManager {
                 let tracks = trackMatches["track"] as? [ [String:Any] ]
                 {
                     let finalTracks = tracks.map(TrackMapper.map)
-                    handler(finalTracks)
+                    handler(.success(finalTracks))
                 }
             default:
-                print("error")
-                // TODO Error
+                handler(.failure(.requestError))
             }
 
             

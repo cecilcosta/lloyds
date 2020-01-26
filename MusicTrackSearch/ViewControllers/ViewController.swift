@@ -26,6 +26,14 @@ class ViewController: UIViewController {
             destination.track = track
         }
     }
+    
+    private func showError() {
+        let alertController = UIAlertController(title: "Error", message: "Something went wrong with your request 😢", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok, thanks for letting me know", style: .default)
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
+        
+    }
 
 }
 
@@ -66,13 +74,23 @@ extension ViewController: UITableViewDataSource {
         
         // if this is the last cell, we should already start loading the next page.
         if indexPath.row == trackCount - 1 {
-            presenter.nextPage {[weak self] (newTracks) in
+            presenter.nextPage {[weak self] (result) in
                 DispatchQueue.main.async {
+                    switch result {
+                    case .success(let newTracks):
+                        guard newTracks.count > 0 else {
+                                return
+                            }
+                            let range = trackCount...(trackCount + newTracks.count - 1)
+                        
+                            let indexPaths = range.map {IndexPath(row: $0, section: 0) }
+                            self?.tableView.insertRows(at: indexPaths, with: .automatic)
+                    case .failure(.requestError):
+                        self?.showError()
+                    case .failure(.wrongPage):
+                        () //do nothing, it might just be a page after the last one
+                    }
                     
-                    let range = trackCount...(trackCount + newTracks.count - 1)
-                
-                    let indexPaths = range.map {IndexPath(row: $0, section: 0) }
-                    self?.tableView.insertRows(at: indexPaths, with: .automatic)
                 }
             }
         }

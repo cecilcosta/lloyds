@@ -16,19 +16,30 @@ class ViewControllerPresenter {
         self.tracks.count
     }
     
-    func search(_ query: String, handler: @escaping ([Track]) -> () ) {
+    func search(_ query: String, handler: @escaping (Result<[Track], MusicError>) -> () ) {
         trackMananger = TrackManager(searchTerm: query)
-        trackMananger?.nextPage{[weak self] tracks in
-            self?.tracks = []
-            self?.tracks.append(contentsOf: tracks)
-            handler(tracks)
+        trackMananger?.nextPage{[weak self] result in
+            switch result {
+            case .success(let tracks):
+                self?.tracks = []
+                self?.tracks.append(contentsOf: tracks)
+                fallthrough
+            case .failure:
+                handler(result)
+            }
+            
         }
     }
     
-    func nextPage(handler: @escaping ([Track]) -> () ) {
-        trackMananger?.nextPage{[weak self] tracks in
-            self?.tracks.append(contentsOf: tracks)
-            handler(tracks)
+    func nextPage(handler: @escaping (Result<[Track], MusicError>) -> () ) {
+        trackMananger?.nextPage{[weak self] result in
+            switch result {
+            case .success(let tracks):
+                self?.tracks.append(contentsOf: tracks)
+                fallthrough
+            case .failure:
+                handler(result)
+            }
         }
         
     }
