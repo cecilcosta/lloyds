@@ -7,45 +7,30 @@
 //
 
 import Foundation
-import Alamofire
 
-class TrackRequester {
+typealias TrackHandler = (Result<TrackPage, MusicError>) -> ()
+
+class TrackManager {
     
-    typealias TrackHandler = (Result<[Track], MusicError>) -> ()
-
-    private let baseURL = "https://ws.audioscrobbler.com/2.0/"
     private let searchTerm: String
-    private let apiKey =  ""
     private var lastPage = 0
-    private let limit = 30
+    
+    var requester: TrackURLRequester = LastFMTrackURLRequester()
     
     init(searchTerm: String) {
         self.searchTerm = searchTerm
     }
     
     func nextPage(handler: @escaping TrackHandler) {
+        requester.request(searchTerms: searchTerm, page: lastPage) { [weak self] result in
+            self?.processResponse(response: result, handler: handler)
+        }
         
-        guard let url = URL(string: baseURL) else {
-            handler(.failure(.requestError))
-            return
-        }
-        AF.request(url,
-                   method: .get,
-                   parameters: [
-                    "method": "track.search",
-                    "track": searchTerm,
-                    "api_key": apiKey,
-                    "format": "json",
-                    "page": "\(lastPage + 1)",
-                    "limit": "\(limit)"
-        ]).responseJSON {[weak self] (dataResponse) in
-            self?.processResponse(response: dataResponse, handler: handler)
-        }
     }
     
-    private func processResponse(response: AFDataResponse<Any>, handler: TrackHandler) {
-        switch response.result {
-        case .success(let json as [String:Any]):
+    private func processResponse(response: RequestResult, handler: TrackHandler) {
+        switch response {
+        case .success(let json):
             guard let results = json["results"] as? [String: Any] else {
                 handler(.failure(.requestError))
                 return
@@ -65,7 +50,8 @@ class TrackRequester {
             let tracks = trackMatches["track"] as? [ [String:Any] ]
             {
                 let finalTracks = tracks.map(TrackMapper.map)
-                handler(.success(finalTracks))
+                let trackPage = TrackPage(pageNum: self.lastPage, tracks: finalTracks)
+                handler(.success(trackPage))
             }
         default:
             handler(.failure(.requestError))

@@ -63,12 +63,12 @@ class ViewController: UIViewController {
                 self?.dismissOverlay()
                 
                 switch result {
-                case .success(let newTracks):
-                    guard newTracks.count > 0 else {
+                case .success(let trackPage):
+                    guard trackPage.tracks.count > 0 else {
                             return
                         }
                         
-                        let range = trackCount...(trackCount + newTracks.count - 1)
+                    let range = trackCount...(trackCount + trackPage.tracks.count - 1)
                     
                         let indexPaths = range.map {IndexPath(row: $0, section: 0) }
                         self?.tableView.insertRows(at: indexPaths, with: .automatic)

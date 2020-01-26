@@ -10,19 +10,18 @@ import Foundation
 
 class ViewControllerPresenter {
     
-    var trackMananger: TrackRequester?
+    var trackMananger: TrackManager?
     private var tracks = [Track]()
     var trackCount: Int {
         self.tracks.count
     }
     
-    func search(_ query: String, handler: @escaping (Result<[Track], MusicError>) -> () ) {
-        trackMananger = TrackRequester(searchTerm: query)
+    func search(_ query: String, handler: @escaping TrackHandler ) {
+        trackMananger = TrackManager(searchTerm: query)
         trackMananger?.nextPage{[weak self] result in
             switch result {
-            case .success(let tracks):
-                self?.tracks = []
-                self?.tracks.append(contentsOf: tracks)
+            case .success(let trackPage):
+                self?.tracks = trackPage.tracks
                 fallthrough
             case .failure:
                 handler(result)
@@ -31,17 +30,16 @@ class ViewControllerPresenter {
         }
     }
     
-    func nextPage(handler: @escaping (Result<[Track], MusicError>) -> () ) {
+    func nextPage(handler: @escaping TrackHandler) {
         trackMananger?.nextPage{[weak self] result in
             switch result {
-            case .success(let tracks):
-                self?.tracks.append(contentsOf: tracks)
+            case .success(let trackPage):
+                self?.tracks.append(contentsOf: trackPage.tracks)
                 fallthrough
             case .failure:
                 handler(result)
             }
         }
-        
     }
     
     func track(at position: Int ) -> Track? {
