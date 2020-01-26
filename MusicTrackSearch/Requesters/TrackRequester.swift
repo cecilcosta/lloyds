@@ -9,10 +9,11 @@
 import Foundation
 import Alamofire
 
-class TrackManager {
+class TrackRequester {
     
     typealias TrackHandler = (Result<[Track], MusicError>) -> ()
 
+    private let baseURL = "https://ws.audioscrobbler.com/2.0/"
     private let searchTerm: String
     private let apiKey =  ""
     private var lastPage = 0
@@ -24,7 +25,7 @@ class TrackManager {
     
     func nextPage(handler: @escaping TrackHandler) {
         
-        guard let url = URL(string: "https://ws.audioscrobbler.com/2.0/") else {
+        guard let url = URL(string: baseURL) else {
             handler(.failure(.requestError))
             return
         }

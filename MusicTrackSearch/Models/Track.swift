@@ -8,6 +8,11 @@
 
 import Foundation
 
+struct Image {
+    var url: URL
+    var size: String
+}
+
 struct Track {
     
     var artist: String?
@@ -15,7 +20,7 @@ struct Track {
     var url: String?
     var streamable: String?
     var listeners: Int?
-    var image: [[String:String]] = [] // TODO class/Struct
+    var image: [Image] = [] 
     var mbid: String?
     
 }

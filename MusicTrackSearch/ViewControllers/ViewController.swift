@@ -42,8 +42,7 @@ class ViewController: UIViewController {
     }
     
     private func dismissOverlay() {
-        alert.dismiss(animated: true)
-        requesting = false
+        alert.dismiss(animated: true, completion: { self.requesting = false })
     }
     
     private func showError() {

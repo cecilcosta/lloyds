@@ -16,9 +16,16 @@ struct TrackMapper {
         let mbid = map["mbid"] as? String
         let streamable = map["streamable"] as? String
         let url = map["url"] as? String
-        let image = map["image"] as? [[String:String]] ?? []
+        let imageMap = map["image"] as? [[String:String]] ?? []
+        let images = imageMap.map{ map -> Image? in
+            guard let imageText = map["#text"],
+            let imageURL = URL(string: imageText),
+                let size = map["size"] else {
+                    return nil
+            }
+            return Image(url: imageURL, size: size)
+        }.filter { $0 != nil }.map { $0! }
         return Track(artist: artist, name: name, url: url,
-                     streamable: streamable, listeners: listeners, image: image, mbid: mbid)
+                     streamable: streamable, listeners: listeners, image: images, mbid: mbid)
     }
 }
-

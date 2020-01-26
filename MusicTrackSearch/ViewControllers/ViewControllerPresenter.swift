@@ -10,14 +10,14 @@ import Foundation
 
 class ViewControllerPresenter {
     
-    var trackMananger: TrackManager?
+    var trackMananger: TrackRequester?
     private var tracks = [Track]()
     var trackCount: Int {
         self.tracks.count
     }
     
     func search(_ query: String, handler: @escaping (Result<[Track], MusicError>) -> () ) {
-        trackMananger = TrackManager(searchTerm: query)
+        trackMananger = TrackRequester(searchTerm: query)
         trackMananger?.nextPage{[weak self] result in
             switch result {
             case .success(let tracks):
