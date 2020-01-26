@@ -34,3 +34,15 @@ class TextCell:CellInfo {
         super.init(label: label, cellType: .value1, cellIdentifier: cellIdentifier)
     }
 }
+
+
+class ActionCell:CellInfo {
+    var field: WritableKeyPath<Track, String?>
+    
+    init(label: String,
+    cellIdentifier: String,
+    field: WritableKeyPath<Track, String?>) {
+        self.field = field
+        super.init(label: label, cellType: .value2, cellIdentifier: cellIdentifier)
+    }
+}

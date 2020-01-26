@@ -75,6 +75,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="vZd-LH-sD9" id="drl-UZ-bit"/>
+                                    <outlet property="delegate" destination="vZd-LH-sD9" id="qon-j2-y5j"/>
                                 </connections>
                             </tableView>
                         </subviews>

@@ -10,10 +10,14 @@ import UIKit
 
 class TrackDetailViewController: UIViewController {
     
+    private static let textCellId = "textCell"
+    private static let actionCellId = "actionCell"
+    
     private let cells: [CellInfo] = [
-        TextCell(label: "Track name", cellIdentifier: "trackCell", field: \Track.name),
-        TextCell(label: "Artist name", cellIdentifier: "trackCell", field: \Track.artist),
-        TextCell(label: "MusicBrainz id", cellIdentifier: "trackCell", field: \Track.mbid)
+        TextCell(label: "Track name", cellIdentifier: textCellId, field: \Track.name),
+        TextCell(label: "Artist name", cellIdentifier: textCellId, field: \Track.artist),
+        TextCell(label: "MusicBrainz id", cellIdentifier: textCellId, field: \Track.mbid),
+        ActionCell(label: "Open its URL", cellIdentifier: actionCellId, field: \Track.url)
     ]
 
     var track: Track!
@@ -43,13 +47,29 @@ extension TrackDetailViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellInfo.cellIdentifier) ?? UITableViewCell(style: cellInfo.cellType, reuseIdentifier: cellInfo.cellIdentifier)
      
+        cell.textLabel?.text = cellInfo.label
+        
         if let cellInfo = cellInfo as? TextCell {
-            cell.textLabel?.text = cellInfo.label
             cell.detailTextLabel?.text = track[keyPath: cellInfo.field]
+            cell.selectionStyle = .none
         }
         
         
         return cell
         
+    }
+}
+
+extension TrackDetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let actionPosition = 3
+       tableView.deselectRow(at: indexPath, animated: true)
+        guard indexPath.row == actionPosition,
+            let urlString = track.url,
+            let url = URL(string: urlString) else {
+            return
+        }
+        
+        UIApplication.shared.open(url)
     }
 }
