@@ -13,8 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    var trackMananger: TrackManager?
-    var tracks = [Track]()
+    private let presenter = ViewControllerPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,23 +30,17 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("Search Bar was called.")
-    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let text = searchBar.text {
-            trackMananger = TrackManager(searchTerm: text)
-            trackMananger?.nextPage{[weak self] tracks in
-                self?.tracks.removeAll()
-                self?.tracks.append(contentsOf: tracks)
+        if let query = searchBar.text {
+            presenter.search(query) {[weak self] (newtracks) in
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
                 }
-                
             }
         }
     }
+    
 }
 
 extension ViewController: UITableViewDataSource {
@@ -56,27 +49,32 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return self.tracks.count
+        return presenter.trackCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) ?? UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
         cell.accessoryType = .disclosureIndicator
-        cell.textLabel?.text = self.tracks[indexPath.row].name
-        cell.detailTextLabel?.text = self.tracks[indexPath.row].artist
+        
+        guard let track = presenter.track(at: indexPath.row) else {
+            return cell
+        }
+        let trackCount = presenter.trackCount
+        cell.textLabel?.text = track.name
+        cell.detailTextLabel?.text = track.artist
+        
+        
         // if this is the last cell, we should already start loading the next page.
-        if indexPath.row == tracks.count - 1 {
-            trackMananger?.nextPage(handler: {[weak self] (tracks) in
-                
+        if indexPath.row == trackCount - 1 {
+            presenter.nextPage {[weak self] (newTracks) in
                 DispatchQueue.main.async {
                     
-                    let range = (self?.tracks.count ?? 0)...((self?.tracks.count ?? 0) + tracks.count - 1)
+                    let range = trackCount...(trackCount + newTracks.count - 1)
                 
                     let indexPaths = range.map {IndexPath(row: $0, section: 0) }
-                    self?.tracks.append(contentsOf: tracks)
                     self?.tableView.insertRows(at: indexPaths, with: .automatic)
                 }
-            })
+            }
         }
         return cell
     }
@@ -84,7 +82,9 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let track = self.tracks[indexPath.row]
+        guard let track = presenter.track(at: indexPath.row) else {
+            return
+        }
         self.performSegue(withIdentifier: "showDetail", sender: track)
     }
 }
