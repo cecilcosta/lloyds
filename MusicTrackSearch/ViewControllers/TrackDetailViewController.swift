@@ -29,13 +29,13 @@ class TrackDetailViewController: UIViewController {
     }
     
     class TextCell:CellInfo {
-        var field: ReferenceWritableKeyPath<Track, String?>
+        var field: WritableKeyPath<Track, String?>
         
         init(label: String,
         cellType: UITableViewCell.Type,
         cellIdentifier: String,
         cellHeight: CGFloat,
-        field: ReferenceWritableKeyPath<Track, String?>) {
+        field: WritableKeyPath<Track, String?>) {
             self.field = field
             super.init(label: label, cellType: cellType, cellIdentifier: cellIdentifier, cellHeight: cellHeight)
         }
