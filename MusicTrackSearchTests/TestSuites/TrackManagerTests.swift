@@ -10,16 +10,6 @@ import XCTest
 @testable import MusicTrackSearch
 
 class TrackManagerTests: XCTestCase {
-    
-    
-
-    override func setUp() {
-        
-    }
-
-    override func tearDown() {
-
-    }
 
     func testSearchMussashiOnePage() {
         

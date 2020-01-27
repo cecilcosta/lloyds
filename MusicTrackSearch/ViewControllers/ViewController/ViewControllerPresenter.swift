@@ -11,18 +11,18 @@ import Foundation
 class ViewControllerPresenter {
     
     private var tracks = [Track]()
-    var trackMananger: TrackManager?
-    var preferredRequester: TrackURLRequester?
+    var trackManager: TrackManager?
     var trackCount: Int {
         self.tracks.count
     }
     
-    func search(_ query: String, handler: @escaping TrackHandler ) {
-        trackMananger = TrackManager(searchTerm: query)
-        if let preferredRequester = preferredRequester {
-            trackMananger?.requester = preferredRequester
+    func search(_ query: String, trackManager: TrackManager? = nil, handler: @escaping TrackHandler ) {
+        if let trackManager = trackManager {
+            self.trackManager = trackManager
+        } else {
+            self.trackManager = TrackManager(searchTerm: query)
         }
-        trackMananger?.nextPage{[weak self] result in
+        self.trackManager?.nextPage{[weak self] result in
             switch result {
             case .success(let trackPage):
                 self?.tracks = trackPage.tracks
@@ -35,7 +35,7 @@ class ViewControllerPresenter {
     }
     
     func nextPage(handler: @escaping TrackHandler) {
-        trackMananger?.nextPage{[weak self] result in
+        trackManager?.nextPage{[weak self] result in
             switch result {
             case .success(let trackPage):
                 self?.tracks.append(contentsOf: trackPage.tracks)

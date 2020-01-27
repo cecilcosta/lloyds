@@ -8,7 +8,8 @@
 
 import Foundation
 
-typealias TrackHandler = (Result<TrackPage, MusicError>) -> ()
+typealias TrackResult = Result<TrackPage, MusicError> 
+typealias TrackHandler = (TrackResult) -> ()
 
 class TrackManager {
     
@@ -44,7 +45,7 @@ class TrackManager {
             }
             
             let finalTracks = tracks.map(TrackMapper.map)
-            let trackPage = TrackPage(pageNum: self.lastPage, tracks: finalTracks)
+
             
             
             
@@ -64,6 +65,7 @@ class TrackManager {
             
             
             self.lastPage = page
+            let trackPage = TrackPage(pageNum: self.lastPage, tracks: finalTracks)
             handler(.success(trackPage))
             
         default:

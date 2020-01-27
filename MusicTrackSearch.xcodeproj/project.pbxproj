@@ -17,14 +17,15 @@
 		3A60367123DE334800F8D17F /* ViewControllerPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60367023DE334800F8D17F /* ViewControllerPresenterTests.swift */; };
 		3A60367323DF685300F8D17F /* MockTrackUrlRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60367223DF685300F8D17F /* MockTrackUrlRequester.swift */; };
 		3A60367523DF699B00F8D17F /* TrackManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60367423DF699B00F8D17F /* TrackManagerTests.swift */; };
-		3A60367923DF742A00F8D17F /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60367823DF742A00F8D17F /* TestData.swift */; };
+		3A60367923DF742A00F8D17F /* TestDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60367823DF742A00F8D17F /* TestDataRequest.swift */; };
+		3A60367E23DF833A00F8D17F /* MockTrackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60367D23DF833A00F8D17F /* MockTrackManager.swift */; };
+		3A60368023DF878600F8D17F /* TestDataTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60367F23DF878600F8D17F /* TestDataTrack.swift */; };
 		3A70CDC423DCA0C100E328E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70CDC323DCA0C100E328E2 /* AppDelegate.swift */; };
 		3A70CDC623DCA0C100E328E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70CDC523DCA0C100E328E2 /* SceneDelegate.swift */; };
 		3A70CDC823DCA0C100E328E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70CDC723DCA0C100E328E2 /* ViewController.swift */; };
 		3A70CDCB23DCA0C100E328E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A70CDC923DCA0C100E328E2 /* Main.storyboard */; };
 		3A70CDCD23DCA0C400E328E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A70CDCC23DCA0C400E328E2 /* Assets.xcassets */; };
 		3A70CDD023DCA0C400E328E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A70CDCE23DCA0C400E328E2 /* LaunchScreen.storyboard */; };
-		3A70CDDB23DCA0C500E328E2 /* MusicTrackSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70CDDA23DCA0C500E328E2 /* MusicTrackSearchTests.swift */; };
 		3A70CDE623DCA0C500E328E2 /* MusicTrackSearchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70CDE523DCA0C500E328E2 /* MusicTrackSearchUITests.swift */; };
 		3A7E442B23DDCB5D0044009B /* ViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E442A23DDCB5D0044009B /* ViewControllerPresenter.swift */; };
 		3AA0F4C123DCA27600BD21F9 /* TrackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA0F4C023DCA27600BD21F9 /* TrackManager.swift */; };
@@ -66,7 +67,9 @@
 		3A60367023DE334800F8D17F /* ViewControllerPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenterTests.swift; sourceTree = "<group>"; };
 		3A60367223DF685300F8D17F /* MockTrackUrlRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTrackUrlRequester.swift; sourceTree = "<group>"; };
 		3A60367423DF699B00F8D17F /* TrackManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackManagerTests.swift; sourceTree = "<group>"; };
-		3A60367823DF742A00F8D17F /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		3A60367823DF742A00F8D17F /* TestDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataRequest.swift; sourceTree = "<group>"; };
+		3A60367D23DF833A00F8D17F /* MockTrackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTrackManager.swift; sourceTree = "<group>"; };
+		3A60367F23DF878600F8D17F /* TestDataTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDataTrack.swift; sourceTree = "<group>"; };
 		3A70CDC023DCA0C100E328E2 /* MusicTrackSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicTrackSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A70CDC323DCA0C100E328E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A70CDC523DCA0C100E328E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,7 +79,6 @@
 		3A70CDCF23DCA0C400E328E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A70CDD123DCA0C400E328E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A70CDD623DCA0C500E328E2 /* MusicTrackSearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicTrackSearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A70CDDA23DCA0C500E328E2 /* MusicTrackSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicTrackSearchTests.swift; sourceTree = "<group>"; };
 		3A70CDDC23DCA0C500E328E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A70CDE123DCA0C500E328E2 /* MusicTrackSearchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicTrackSearchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A70CDE523DCA0C500E328E2 /* MusicTrackSearchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicTrackSearchUITests.swift; sourceTree = "<group>"; };
@@ -173,6 +175,33 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		3A60367A23DF819900F8D17F /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				3A60367223DF685300F8D17F /* MockTrackUrlRequester.swift */,
+				3A60367D23DF833A00F8D17F /* MockTrackManager.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		3A60367B23DF81A700F8D17F /* TestSuites */ = {
+			isa = PBXGroup;
+			children = (
+				3A60367423DF699B00F8D17F /* TrackManagerTests.swift */,
+				3A60367023DE334800F8D17F /* ViewControllerPresenterTests.swift */,
+			);
+			path = TestSuites;
+			sourceTree = "<group>";
+		};
+		3A60367C23DF81DC00F8D17F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3A60367823DF742A00F8D17F /* TestDataRequest.swift */,
+				3A60367F23DF878600F8D17F /* TestDataTrack.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		3A70CDB723DCA0C100E328E2 = {
 			isa = PBXGroup;
 			children = (
@@ -217,12 +246,10 @@
 		3A70CDD923DCA0C500E328E2 /* MusicTrackSearchTests */ = {
 			isa = PBXGroup;
 			children = (
-				3A70CDDA23DCA0C500E328E2 /* MusicTrackSearchTests.swift */,
+				3A60367C23DF81DC00F8D17F /* Data */,
+				3A60367B23DF81A700F8D17F /* TestSuites */,
+				3A60367A23DF819900F8D17F /* Mocks */,
 				3A70CDDC23DCA0C500E328E2 /* Info.plist */,
-				3A60367023DE334800F8D17F /* ViewControllerPresenterTests.swift */,
-				3A60367223DF685300F8D17F /* MockTrackUrlRequester.swift */,
-				3A60367423DF699B00F8D17F /* TrackManagerTests.swift */,
-				3A60367823DF742A00F8D17F /* TestData.swift */,
 			);
 			path = MusicTrackSearchTests;
 			sourceTree = "<group>";
@@ -539,8 +566,9 @@
 			files = (
 				3A60367323DF685300F8D17F /* MockTrackUrlRequester.swift in Sources */,
 				3A60367523DF699B00F8D17F /* TrackManagerTests.swift in Sources */,
-				3A70CDDB23DCA0C500E328E2 /* MusicTrackSearchTests.swift in Sources */,
-				3A60367923DF742A00F8D17F /* TestData.swift in Sources */,
+				3A60367E23DF833A00F8D17F /* MockTrackManager.swift in Sources */,
+				3A60368023DF878600F8D17F /* TestDataTrack.swift in Sources */,
+				3A60367923DF742A00F8D17F /* TestDataRequest.swift in Sources */,
 				3A60367123DE334800F8D17F /* ViewControllerPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
