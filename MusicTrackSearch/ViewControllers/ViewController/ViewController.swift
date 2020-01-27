@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         loadingIndicator.style = UIActivityIndicatorView.Style.medium
         loadingIndicator.startAnimating();
         alert.view.addSubview(loadingIndicator)
-       
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -36,13 +36,18 @@ class ViewController: UIViewController {
         }
     }
     
+    // MARK: - Show/dismiss warnings
+    
     private func showOverlay() {
         requesting = true
         present(alert, animated: true, completion: nil)
     }
     
-    private func dismissOverlay() {
-        alert.dismiss(animated: true, completion: { self.requesting = false })
+    private func dismissOverlay(handler: (()->())? = nil) {
+        alert.dismiss(animated: true, completion: {
+            self.requesting = false
+            handler?()
+        })
     }
     
     private func showError() {
@@ -51,6 +56,13 @@ class ViewController: UIViewController {
         alertController.addAction(okAction)
         present(alertController, animated: true)
         
+    }
+    
+    private func showNotFound() {
+        let alertController = UIAlertController(title: "Error", message: "Something went wrong with your request 😢", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok, thanks for letting me know", style: .default)
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
     }
     
     private func requestNextPage() {
@@ -65,13 +77,13 @@ class ViewController: UIViewController {
                 switch result {
                 case .success(let trackPage):
                     guard trackPage.tracks.count > 0 else {
-                            return
-                        }
-                        
+                        return
+                    }
+                    
                     let range = trackCount...(trackCount + trackPage.tracks.count - 1)
                     
-                        let indexPaths = range.map {IndexPath(row: $0, section: 0) }
-                        self?.tableView.insertRows(at: indexPaths, with: .automatic)
+                    let indexPaths = range.map {IndexPath(row: $0, section: 0) }
+                    self?.tableView.insertRows(at: indexPaths, with: .automatic)
                 case .failure(.requestError):
                     self?.showError()
                 case .failure(.wrongPage):
@@ -80,7 +92,7 @@ class ViewController: UIViewController {
             }
         }
     }
-
+    
 }
 
 extension ViewController: UISearchBarDelegate {
@@ -90,8 +102,18 @@ extension ViewController: UISearchBarDelegate {
             showOverlay()
             presenter.search(query) {[weak self] (newtracks) in
                 DispatchQueue.main.async {
-                    self?.dismissOverlay()
-                    self?.tableView.reloadData()
+                    self?.dismissOverlay {
+                        guard let this = self else {
+                            return
+                        }
+                        if this.presenter.trackCount == 0 {
+                            this.showError()
+                        }
+                        this.tableView.reloadData()
+                    
+                        
+                    }
+                    
                 }
             }
         }
@@ -128,7 +150,7 @@ extension ViewController: UITableViewDataSource {
                     guard case .success(let image) = result,
                         let row = self?.tableView.indexPath(for: cell)?.row,
                         row == currentPosition else {
-                        return
+                            return
                     }
                     
                     // Here my mind has blown up. I was not able to find any picture different than a white star. (https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png"). If you know any example please let me know and check if there are issues here or not. 🙃
