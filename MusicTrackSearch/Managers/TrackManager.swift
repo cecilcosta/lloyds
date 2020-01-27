@@ -13,7 +13,7 @@ typealias TrackHandler = (Result<TrackPage, MusicError>) -> ()
 class TrackManager {
     
     private let searchTerm: String
-    private var lastPage = 0
+    private(set) var lastPage = 0
     
     var requester: TrackURLRequester = LastFMTrackURLRequester()
     
@@ -36,23 +36,36 @@ class TrackManager {
                 return
             }
             
-            if let query = results["opensearch:Query"] as? [String:Any],
-                let startPage = query["startPage"] as? String,
-                let page = Int(startPage){
-                guard page > self.lastPage else {
-                    handler(.failure(.wrongPage))
+            guard let trackMatches = results["trackmatches"] as? [String: Any],
+                let tracks = trackMatches["track"] as? [ [String:Any] ]
+                else {
+                    handler(.failure(.requestError))
                     return
-                }
-                self.lastPage = page
             }
             
-            if let trackMatches = results["trackmatches"] as? [String: Any],
-            let tracks = trackMatches["track"] as? [ [String:Any] ]
-            {
-                let finalTracks = tracks.map(TrackMapper.map)
-                let trackPage = TrackPage(pageNum: self.lastPage, tracks: finalTracks)
-                handler(.success(trackPage))
+            let finalTracks = tracks.map(TrackMapper.map)
+            let trackPage = TrackPage(pageNum: self.lastPage, tracks: finalTracks)
+            
+            
+            
+            guard let query = results["opensearch:Query"] as? [String:Any],
+                let startPage = query["startPage"] as? String,
+                let page = Int(startPage),
+                page > self.lastPage else {
+                    handler(.failure(.wrongPage))
+                    return
             }
+            
+            // The first page is the only one which can be accepted as empty. If there an empty page with no tracks it means that we overtook the limit of pages.
+            guard page == 1 || finalTracks.count > 0 else {
+                handler(.failure(.wrongPage))
+                return
+            }
+            
+            
+            self.lastPage = page
+            handler(.success(trackPage))
+            
         default:
             handler(.failure(.requestError))
         }

@@ -10,14 +10,18 @@ import Foundation
 
 class ViewControllerPresenter {
     
-    var trackMananger: TrackManager?
     private var tracks = [Track]()
+    var trackMananger: TrackManager?
+    var preferredRequester: TrackURLRequester?
     var trackCount: Int {
         self.tracks.count
     }
     
     func search(_ query: String, handler: @escaping TrackHandler ) {
         trackMananger = TrackManager(searchTerm: query)
+        if let preferredRequester = preferredRequester {
+            trackMananger?.requester = preferredRequester
+        }
         trackMananger?.nextPage{[weak self] result in
             switch result {
             case .success(let trackPage):

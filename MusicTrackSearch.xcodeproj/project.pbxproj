@@ -14,6 +14,10 @@
 		3A60366A23DE265000F8D17F /* TrackURLRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60366923DE265000F8D17F /* TrackURLRequester.swift */; };
 		3A60366C23DE272B00F8D17F /* LastFMTrackURLRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60366B23DE272B00F8D17F /* LastFMTrackURLRequester.swift */; };
 		3A60366E23DE28E100F8D17F /* TrackPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60366D23DE28E100F8D17F /* TrackPage.swift */; };
+		3A60367123DE334800F8D17F /* ViewControllerPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60367023DE334800F8D17F /* ViewControllerPresenterTests.swift */; };
+		3A60367323DF685300F8D17F /* MockTrackUrlRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60367223DF685300F8D17F /* MockTrackUrlRequester.swift */; };
+		3A60367523DF699B00F8D17F /* TrackManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60367423DF699B00F8D17F /* TrackManagerTests.swift */; };
+		3A60367923DF742A00F8D17F /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60367823DF742A00F8D17F /* TestData.swift */; };
 		3A70CDC423DCA0C100E328E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70CDC323DCA0C100E328E2 /* AppDelegate.swift */; };
 		3A70CDC623DCA0C100E328E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70CDC523DCA0C100E328E2 /* SceneDelegate.swift */; };
 		3A70CDC823DCA0C100E328E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A70CDC723DCA0C100E328E2 /* ViewController.swift */; };
@@ -59,6 +63,10 @@
 		3A60366923DE265000F8D17F /* TrackURLRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackURLRequester.swift; sourceTree = "<group>"; };
 		3A60366B23DE272B00F8D17F /* LastFMTrackURLRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastFMTrackURLRequester.swift; sourceTree = "<group>"; };
 		3A60366D23DE28E100F8D17F /* TrackPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackPage.swift; sourceTree = "<group>"; };
+		3A60367023DE334800F8D17F /* ViewControllerPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenterTests.swift; sourceTree = "<group>"; };
+		3A60367223DF685300F8D17F /* MockTrackUrlRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTrackUrlRequester.swift; sourceTree = "<group>"; };
+		3A60367423DF699B00F8D17F /* TrackManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackManagerTests.swift; sourceTree = "<group>"; };
+		3A60367823DF742A00F8D17F /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		3A70CDC023DCA0C100E328E2 /* MusicTrackSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicTrackSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A70CDC323DCA0C100E328E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A70CDC523DCA0C100E328E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -211,6 +219,10 @@
 			children = (
 				3A70CDDA23DCA0C500E328E2 /* MusicTrackSearchTests.swift */,
 				3A70CDDC23DCA0C500E328E2 /* Info.plist */,
+				3A60367023DE334800F8D17F /* ViewControllerPresenterTests.swift */,
+				3A60367223DF685300F8D17F /* MockTrackUrlRequester.swift */,
+				3A60367423DF699B00F8D17F /* TrackManagerTests.swift */,
+				3A60367823DF742A00F8D17F /* TestData.swift */,
 			);
 			path = MusicTrackSearchTests;
 			sourceTree = "<group>";
@@ -525,7 +537,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A60367323DF685300F8D17F /* MockTrackUrlRequester.swift in Sources */,
+				3A60367523DF699B00F8D17F /* TrackManagerTests.swift in Sources */,
 				3A70CDDB23DCA0C500E328E2 /* MusicTrackSearchTests.swift in Sources */,
+				3A60367923DF742A00F8D17F /* TestData.swift in Sources */,
+				3A60367123DE334800F8D17F /* ViewControllerPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
